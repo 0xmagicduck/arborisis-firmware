@@ -1,0 +1,84 @@
+{
+  "l1pro": [
+    {
+      "src": "/screens/l1pro/home.png",
+      "caption": "Accueil : horloge, batterie, Bluetooth et relais"
+    },
+    {
+      "src": "/screens/l1pro/t9-sentence.png",
+      "caption": "Clavier T9 : une pression par lettre"
+    },
+    {
+      "src": "/screens/l1pro/t9-completion.png",
+      "caption": "Complétion et mots suivants du dictionnaire"
+    },
+    {
+      "src": "/screens/l1pro/menu-grid.png",
+      "caption": "Menu en grille d’icônes"
+    },
+    {
+      "src": "/screens/l1pro/chat.png",
+      "caption": "Conversation avec accusé de réception"
+    },
+    {
+      "src": "/screens/l1pro/message-details.png",
+      "caption": "Détails d’un message : chemin, état, essais"
+    },
+    {
+      "src": "/screens/l1pro/radar.png",
+      "caption": "Radar des contacts localisés"
+    },
+    {
+      "src": "/screens/l1pro/navigate.png",
+      "caption": "Navigation vers un contact ou un repère"
+    },
+    {
+      "src": "/screens/l1pro/sos.png",
+      "caption": "SOS répété avec votre position"
+    },
+    {
+      "src": "/screens/l1pro/relay.png",
+      "caption": "Relais automatique selon la batterie"
+    }
+  ],
+  "heltec": [
+    {
+      "src": "/screens/heltec/relay.png",
+      "caption": "Relais actif et trafic en direct"
+    },
+    {
+      "src": "/screens/heltec/chat.png",
+      "caption": "Messages lus sur l’écran"
+    },
+    {
+      "src": "/screens/heltec/neighbours.png",
+      "caption": "Nœuds entendus et signal"
+    },
+    {
+      "src": "/screens/heltec/radio.png",
+      "caption": "Radio : fréquence, bruit, CAD automatique"
+    },
+    {
+      "src": "/screens/heltec/actions.png",
+      "caption": "Actions rapides au bouton PRG"
+    }
+  ],
+  "repeater": [
+    {
+      "src": "/screens/repeater/calibration.png",
+      "caption": "Calibration automatique du bruit"
+    },
+    {
+      "src": "/screens/repeater/cad.png",
+      "caption": "CAD adaptatif avant émission"
+    },
+    {
+      "src": "/screens/repeater/traffic.png",
+      "caption": "Trafic flood et direct"
+    },
+    {
+      "src": "/screens/repeater/health.png",
+      "caption": "Santé : batterie, température, mémoire"
+    }
+  ]
+}
