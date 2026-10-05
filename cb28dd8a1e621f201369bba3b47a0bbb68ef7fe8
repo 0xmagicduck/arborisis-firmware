@@ -1,0 +1,28 @@
+LICENSE
+  h_5f6fb4778954a1 1-21
+README.md
+  h_5f6fb4778954a1 1-39
+guides/heltec.md
+  h_5f6fb4778954a1 1-198
+guides/l1pro.md
+  h_5f6fb4778954a1 1-598
+guides/mio.md
+  h_5f6fb4778954a1 1-185
+guides/repeater.md
+  h_5f6fb4778954a1 1-248
+guides/watch.md
+  h_5f6fb4778954a1 1-277
+screens/screens.json
+  h_5f6fb4778954a1 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cb28dd8a1e621f201369bba3b47a0bbb68ef7fe8",
+  "prompts": {},
+  "humans": {
+    "h_5f6fb4778954a1": {
+      "author": "Bastien Javaux <0xmagicduck@proton.me>"
+    }
+  }
+}
