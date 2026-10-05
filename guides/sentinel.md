@@ -9,6 +9,10 @@ quand et où**.
 La cible PlatformIO est `ArborisisOS_HeltecV3_sentinel` (version **1.0.0**). Le protocole est décrit dans
 [docs/sentinelle-protocole.md](docs/sentinelle-protocole.md).
 
+Un **répéteur Arborisis** 1.2+ peut faire le même travail sans batterie dédiée : son mode sentinelle envoie
+les mêmes rapports (marqués « répéteur ») et reçoit les mêmes ACK ; branché en USB à un pont observateur, il
+devient un observateur connecté. Voir [Observateur pour la carte](ARBORISIS-REPEATER-HELTEC-V3.md#observateur-pour-la-carte).
+
 > **Statut** : firmware compilé, logique de routage et d'ACK testée sur l'ordinateur (130 contrôles avec
 > AddressSanitizer/UBSan, dont la couche MeshCore réelle avec une radio simulée), paquets du firmware décodés
 > par le serveur, aller-retour complet rapport → serveur → pont observateur → ACK testé de bout en bout.
