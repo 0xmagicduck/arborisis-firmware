@@ -29,7 +29,7 @@ Chaque release contient `SHA256SUMS` et `manifest.json` (adresses de flash, tail
 - [`mio-v1.0.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/mio-v1.0.0) — Mio Cyclo · appli MeshCore 1.0.0, Appli MeshCore pour Mio Cyclo (2026-09-29)
 - [`sentinel-v1.0.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/sentinel-v1.0.0) — Heltec V3 · sentinelle 1.0.0, Observateur sans Internet sur batterie (2026-10-05)
 - [`repeater-v1.2.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.2.0) — Heltec V3 · répéteur 1.2.0, Observateur pour la carte : USB (MQTT) ou sentinelle avec ACK (2026-10-05)
-- [`repeater-v1.1.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.1.0) — Heltec V3 · répéteur 1.1.0, Calibration automatique et CAD adaptatif (2026-10-01) · remplacée
+- [`repeater-v1.1.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.1.0) — Heltec V3 · répéteur 1.1.0, Calibration automatique et CAD adaptatif (2026-10-01)
 - [`repeater-v1.0.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.0.0) — Heltec V3 · répéteur 1.0.0, Répéteur dédié (2026-10-01) · remplacée
 - [`heltec-v1.0.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/heltec-v1.0.0) — Heltec V3 · relais + compagnon 1.0.0, Relais + compagnon, calibration automatique et CAD (2026-10-01)
 - [`l1pro-v2.2.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/l1pro-v2.2.0) — Wio Tracker L1 Pro 2.2.0, T9 et dictionnaire français (2026-10-04)
