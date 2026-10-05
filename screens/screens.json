@@ -2,83 +2,159 @@
   "l1pro": [
     {
       "src": "/screens/l1pro/home.png",
-      "caption": "Accueil : horloge, batterie, Bluetooth et relais"
+      "caption": "Accueil : horloge, batterie, Bluetooth et relais",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/t9-sentence.png",
-      "caption": "Clavier T9 : une pression par lettre"
+      "caption": "Clavier T9 : une pression par lettre",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/t9-completion.png",
-      "caption": "Complétion et mots suivants du dictionnaire"
+      "caption": "Complétion et mots suivants du dictionnaire",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/menu-grid.png",
-      "caption": "Menu en grille d’icônes"
+      "caption": "Menu en grille d’icônes",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/chat.png",
-      "caption": "Conversation avec accusé de réception"
+      "caption": "Conversation avec accusé de réception",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/message-details.png",
-      "caption": "Détails d’un message : chemin, état, essais"
+      "caption": "Détails d’un message : chemin, état, essais",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/radar.png",
-      "caption": "Radar des contacts localisés"
+      "caption": "Radar des contacts localisés",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/navigate.png",
-      "caption": "Navigation vers un contact ou un repère"
+      "caption": "Navigation vers un contact ou un repère",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/sos.png",
-      "caption": "SOS répété avec votre position"
+      "caption": "SOS répété avec votre position",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/l1pro/relay.png",
-      "caption": "Relais automatique selon la batterie"
+      "caption": "Relais automatique selon la batterie",
+      "width": 512,
+      "height": 256
     }
   ],
   "heltec": [
     {
       "src": "/screens/heltec/relay.png",
-      "caption": "Relais actif et trafic en direct"
+      "caption": "Relais actif et trafic en direct",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/heltec/chat.png",
-      "caption": "Messages lus sur l’écran"
+      "caption": "Messages lus sur l’écran",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/heltec/neighbours.png",
-      "caption": "Nœuds entendus et signal"
+      "caption": "Nœuds entendus et signal",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/heltec/radio.png",
-      "caption": "Radio : fréquence, bruit, CAD automatique"
+      "caption": "Radio : fréquence, bruit, CAD automatique",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/heltec/actions.png",
-      "caption": "Actions rapides au bouton PRG"
+      "caption": "Actions rapides au bouton PRG",
+      "width": 512,
+      "height": 256
     }
   ],
   "repeater": [
     {
       "src": "/screens/repeater/calibration.png",
-      "caption": "Calibration automatique du bruit"
+      "caption": "Calibration automatique du bruit",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/repeater/cad.png",
-      "caption": "CAD adaptatif avant émission"
+      "caption": "CAD adaptatif avant émission",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/repeater/traffic.png",
-      "caption": "Trafic flood et direct"
+      "caption": "Trafic flood et direct",
+      "width": 512,
+      "height": 256
     },
     {
       "src": "/screens/repeater/health.png",
-      "caption": "Santé : batterie, température, mémoire"
+      "caption": "Santé : batterie, température, mémoire",
+      "width": 512,
+      "height": 256
+    }
+  ],
+  "mio": [
+    {
+      "src": "/screens/mio/messages.webp",
+      "caption": "Conversations et canaux sur le compteur",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "src": "/screens/mio/conversation.webp",
+      "caption": "Réponse rapide pendant la sortie",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "src": "/screens/mio/relays.webp",
+      "caption": "Relais et contacts, triés par distance",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "src": "/screens/mio/radar.webp",
+      "caption": "Radar autour de votre position GPS",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "src": "/screens/mio/status.webp",
+      "caption": "État du Heltec relié en Wi-Fi",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "src": "/screens/mio/night.webp",
+      "caption": "Mode nuit",
+      "width": 320,
+      "height": 480
     }
   ]
 }
