@@ -10,8 +10,8 @@ Firmwares Arborisis OS publiés pour le Wio Tracker L1 Pro, la Heltec V3 et le M
 |---|---|---|---|
 | **Wio Tracker L1 Pro** | [2.2.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/l1pro-v2.2.0) | Testée sur l’appareil | Messagerie autonome au joystick, clavier T9 et dictionnaire français, GPS, radar, SOS. Fonctionne seul ou avec l’appli MeshCore. |
 | **Heltec V3 · relais + compagnon** | [1.0.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/heltec-v1.0.0) | Testée en simulateur | Relais MeshCore et compagnon de l’appli en même temps, en Bluetooth et en USB. Variantes Apple Watch et Mio Cyclo. |
-| **Heltec V3 · répéteur** | [1.2.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.2.0) | Compilée | Répéteur MeshCore dédié avec calibration automatique, CAD adaptatif, administration par le mesh et observation pour la carte (USB/MQTT ou sentinelle). |
-| **Heltec V3 · sentinelle** | [1.0.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/sentinel-v1.0.0) | Compilée | Observateur MeshCore sans Internet, sur batterie : il écoute le réseau et confie ses rapports aux observateurs connectés. Batterie suivie sur la carte. |
+| **Heltec V3 · répéteur** | [1.3.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.3.0) | Compilée | Répéteur MeshCore dédié avec calibration automatique, CAD adaptatif, administration par le mesh et observation pour la carte (USB/MQTT ou sentinelle). |
+| **Heltec V3 · sentinelle** | [1.1.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/sentinel-v1.1.0) | Testée sur l’appareil | Observateur MeshCore sans Internet, sur batterie : il écoute le réseau et confie ses rapports aux observateurs connectés. Batterie suivie sur la carte. |
 | **Mio Cyclo · appli MeshCore** | [1.0.0](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/mio-v1.0.0) | Testée en simulateur | L’appli MeshCore sur le compteur vélo Mio Cyclo Discover Connect, reliée au Heltec V3 par Wi-Fi. |
 
 L’application Apple Watch s’installe depuis Xcode ([guide](guides/watch.md)) avec la variante **Apple Watch** du firmware Heltec V3.
@@ -27,6 +27,8 @@ Chaque release contient `SHA256SUMS` et `manifest.json` (adresses de flash, tail
 ## Toutes les releases
 
 - [`mio-v1.0.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/mio-v1.0.0) — Mio Cyclo · appli MeshCore 1.0.0, Appli MeshCore pour Mio Cyclo (2026-09-29)
+- [`sentinel-v1.1.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/sentinel-v1.1.0) — Heltec V3 · sentinelle 1.1.0, Gestion à distance et mises à jour par le réseau MeshCore (2026-10-06)
+- [`repeater-v1.3.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.3.0) — Heltec V3 · répéteur 1.3.0, Gestion à distance et mises à jour par le réseau MeshCore (2026-10-06)
 - [`sentinel-v1.0.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/sentinel-v1.0.0) — Heltec V3 · sentinelle 1.0.0, Observateur sans Internet sur batterie (2026-10-05)
 - [`repeater-v1.2.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.2.0) — Heltec V3 · répéteur 1.2.0, Observateur pour la carte : USB (MQTT) ou sentinelle avec ACK (2026-10-05)
 - [`repeater-v1.1.0`](https://github.com/0xmagicduck/arborisis-firmware/releases/tag/repeater-v1.1.0) — Heltec V3 · répéteur 1.1.0, Calibration automatique et CAD adaptatif (2026-10-01)

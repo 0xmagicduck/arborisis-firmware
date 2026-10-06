@@ -228,6 +228,32 @@ passerelle (ou ouvre les réglages si le mode est arrêté). Les réglages sont 
 `/arbo_observer` avec le compteur de démarrages et la dernière route confirmée, revérifiée par le
 premier rapport après un redémarrage.
 
+### Gestion à distance et mises à jour par le réseau (1.3)
+
+Depuis la 1.3.0, le répéteur partage le moteur des sentinelles 1.1
+([Gestion à distance et mises à jour](ARBORISIS-SENTINELLE.md#gestion-à-distance-et-mises-à-jour)) :
+
+- il envoie son **état** (version, build, radio, position, passerelles) au serveur et exécute les **commandes**
+  de la fiche (nom, position, puissance, taille des sauts, passerelles, route, test, mode sentinelle,
+  redémarrage) — les réglages radio restent dans l'administration MeshCore habituelle ;
+- il se **met à jour par le réseau** : paquet signé téléchargé morceau par morceau, installé dans la partition
+  inactive, confirmé au premier ACK ou après 2 min sans plantage en entendant le réseau, sinon retour automatique à
+  l'ancienne version (2 h sans rien entendre) ;
+- il **sert les sentinelles autour de lui** (`ota seed on`, par défaut) : après une installation, ou quand le
+  serveur lui a envoyé un paquet de sentinelle « pour les voisins », il l'annonce et le transmet en un saut ;
+- **branché à un pont observateur**, ses rapports, états et demandes passent par l'USB au lieu de l'antenne, et
+  les réponses du serveur reviennent par `obs tx` : il se gère et se met à jour à travers son propre pont.
+
+| Commande | Effet |
+|---|---|
+| `ota` | Version, build, paquet en cours et reçus, paquet gardé |
+| `ota auto on\|off` / `ota seed on\|off` | Mises à jour automatiques depuis les voisins / servir les voisins |
+| `ota cancel` / `ota info` | Abandonner le paquet / envoyer l'état au serveur |
+| `ota fetch <id>`, `ota offer <hex>`, `ota data <hex>` | Installer un paquet par USB (`tools/ota/usb-feed.mjs`) |
+
+Les réglages du mode observateur écrits par la 1.2 sont repris tels quels. Un répéteur en 1.2 doit être flashé
+une fois par USB pour passer en 1.3.
+
 ## Administration
 
 Dans l'appli MeshCore, connectée à **un autre compagnon** réglé sur la même radio, recevoir

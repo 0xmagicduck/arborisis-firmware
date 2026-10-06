@@ -6,8 +6,13 @@ qu'elle entend et confie ce résumé, **par MeshCore**, aux observateurs qui ont
 Le serveur suit en temps réel la batterie de chaque sentinelle et indique sur la carte **lesquelles changer,
 quand et où**.
 
-La cible PlatformIO est `ArborisisOS_HeltecV3_sentinel` (version **1.0.0**). Le protocole est décrit dans
+La cible PlatformIO est `ArborisisOS_HeltecV3_sentinel` (version **1.1.0**). Le protocole est décrit dans
 [docs/sentinelle-protocole.md](docs/sentinelle-protocole.md).
+
+Depuis la 1.1.0, une sentinelle se **gère à distance** depuis la carte (nom, position, puissance, passerelles,
+route, test, redémarrage, radio avec retour automatique…) et se **met à jour par le réseau MeshCore**, sans
+Wi-Fi ni ordinateur sur place : voir [Gestion à distance et mises à jour](#gestion-à-distance-et-mises-à-jour).
+Une carte en 1.0.0 doit être flashée une dernière fois par USB pour recevoir la 1.1.0.
 
 Un **répéteur Arborisis** 1.2+ peut faire le même travail sans batterie dédiée : son mode sentinelle envoie
 les mêmes rapports (marqués « répéteur ») et reçoit les mêmes ACK ; branché en USB à un pont observateur, il
@@ -148,9 +153,64 @@ elle est alimentée par l'USB sans batterie.
 | `rxwake <symboles>`, `rxpre 16\|32` | Réglage fin de l'écoute cyclique |
 | `flood <heures>` | Intervalle minimal entre deux inondations de découverte |
 | `flip`, `reboot` | Écran retourné, redémarrage |
+| `ota` | État de la mise à jour (version, build, paquet en cours, paquet gardé) |
+| `ota auto on\|off`, `ota seed on\|off` | Mises à jour automatiques depuis les voisins ; servir les voisins |
+| `ota cancel` | Abandonner le paquet en cours |
+| `ota fetch <id>`, `ota offer <hex>`, `ota data <hex>` | Installer un paquet par USB (`tools/ota/usb-feed.mjs`) |
+| `sendinfo` | Envoyer tout de suite son état (INFO) au serveur |
 
 Le serveur peut aussi changer l'intervalle, le rythme des ACK et le profil à distance : la modification faite
 sur la fiche part avec le prochain ACK.
+
+## Gestion à distance et mises à jour
+
+Tout passe par le réseau MeshCore, avec les messages déjà utilisés par les rapports (détail :
+[docs/sentinelle-protocole.md](docs/sentinelle-protocole.md#gestion-à-distance)).
+
+- **État (INFO)** : après chaque démarrage, après chaque commande et à la fin d'une mise à jour, la sentinelle
+  envoie sa version, l'empreinte de son image (*build*), sa configuration, ses passerelles et l'état de la mise à
+  jour. La fiche de la carte l'affiche (« Firmware et mise à jour par le réseau »).
+- **Commandes** : la fiche (« Gestion à distance ») met une liste de commandes en file ; elle part avec la
+  prochaine réponse du serveur (ACK), même à un rapport qui n'en demandait pas. Le serveur ajoute le drapeau
+  « encore » tant que d'autres attendent : la sentinelle revient alors 12 à 20 s plus tard au lieu d'attendre
+  son intervalle. Chaque liste porte un numéro croissant, exécutée une seule fois ; l'INFO qui suit la confirme.
+  Un changement de radio n'est gardé que si le serveur répond sur les nouveaux réglages : sans ACK pendant le
+  délai choisi (2 h par défaut), la carte revient seule aux anciens.
+- **Mise à jour** : un paquet `.aota` (image complète ou *delta* depuis la version installée, compressé) est
+  signé avec la clé de publication Arborisis ; seule sa moitié publique est dans le firmware, donc ni le serveur,
+  ni une passerelle, ni un voisin ne peuvent en fabriquer un. La sentinelle demande les morceaux qui lui
+  manquent (NEED, 64 à la fois), le serveur les envoie par la passerelle la plus proche, un toutes les 4 à 20 s
+  selon la cadence choisie. Chaque morceau est vérifié contre une table signée, écrit directement dans la
+  partition inactive ; la progression survit à un redémarrage ou un changement de batterie. Sous 30 % de
+  batterie (sans alimentation externe) le transfert se met en pause. Complet, le paquet est décompressé,
+  appliqué, son empreinte SHA-256 comparée à l'offre, puis la carte redémarre sur la nouvelle version.
+- **Retour arrière automatique** : la nouvelle version démarre « en vérification ». Elle se confirme au premier
+  ACK du serveur, ou après 2 min sans plantage en entendant le réseau. Si elle plante ou n'entend rien, la carte
+  redémarre sur l'ancienne version et le signale (INFO « revenue à l'ancienne version »).
+- **De voisin à voisin** : une carte qui a installé un paquet le garde et peut le servir. Un répéteur Arborisis
+  1.3+ (sur secteur ou solaire) le fait par défaut : il annonce le paquet autour de lui, et les sentinelles dont
+  la version est plus ancienne le téléchargent **en un seul saut**, sans le serveur. Le serveur peut aussi
+  envoyer un paquet de sentinelle à un répéteur « pour les voisins » (option cache).
+- **Automatique** : le serveur récupère les paquets `.aota` publiés sur les GitHub Releases
+  (`OTA_RELEASES_REPO`, défaut `0xmagicduck/arborisis-firmware`, toutes les 30 min) et, si « Mises à jour
+  automatiques » est coché dans l'onglet **Mises à jour**, lance seul la mise à jour des cartes plus anciennes
+  entendues dans les 2 dernières heures (2 à la fois par défaut). Un paquet qui échoue sur une carte attend
+  24 h avant un nouvel essai.
+
+Fabriquer les paquets d'une nouvelle version (clé de publication dans `~/.config/arborisis/`, à sauvegarder) :
+
+```sh
+node tools/ota/arbo-ota.mjs keygen                       # une seule fois ; puis pubkey --write-header
+node tools/ota/arbo-ota.mjs matrix --product sentinel --version 1.1.1 \
+  --image .pio/build/ArborisisOS_HeltecV3_sentinel/firmware.bin \
+  --bases release/ArborisisOS_HeltecV3_sentinel-v1.1.0.bin --out-dir release/ota
+node tools/ota/usb-feed.mjs release/ota/sentinel-v1.1.1-full.aota   # essai sur une carte branchée
+```
+
+puis les ajouter à la release GitHub (ou par le bouton **Ajouter un paquet** de l'onglet Mises à jour).
+
+Taille sur l'antenne : la mise à jour réelle du répéteur 1.1.0 → 1.2.0 fait 88 Ko en delta (563 morceaux,
+environ 1 h 15 à la cadence normale) contre 820 Ko en image complète ; un correctif fait quelques Ko.
 
 ## Carte et administration
 
@@ -175,7 +235,11 @@ les positions désignent du matériel posé dans la rue :
 
 API (jeton administrateur `ADMIN_TOKEN`) : `GET/POST /api/mesh/sentinels`, `GET/PATCH/DELETE
 /api/mesh/sentinels/{id}`, `POST /api/mesh/sentinels/{id}/battery`, `GET /api/mesh/sentinels/maintenance`,
-`GET /api/mesh/sentinels/gateways`, `GET /api/mesh/sentinels/events`, `GET /api/mesh/sentinels/stream?token=`.
+`GET /api/mesh/sentinels/gateways`, `GET /api/mesh/sentinels/events`, `GET /api/mesh/sentinels/stream?token=`,
+`POST /api/mesh/sentinels/{id}/commands` (`{ ops: [{ op, value }] }`), `POST/DELETE /api/mesh/sentinels/{id}/ota`,
+`GET /api/mesh/sentinels/ota`, `POST /api/mesh/sentinels/ota/packages` (fichier `.aota` en
+`application/octet-stream`), `DELETE /api/mesh/sentinels/ota/packages/{id}`, `POST /api/mesh/sentinels/ota/rollout`,
+`PATCH /api/mesh/sentinels/ota/settings`, `POST /api/mesh/sentinels/ota/sync`.
 Passerelles (jeton observateur) : `GET /api/mesh/downlink?wait=25`, `POST /api/mesh/downlink/{id}/result`.
 
 ## Sécurité
@@ -186,6 +250,12 @@ Passerelles (jeton observateur) : `GET /api/mesh/downlink?wait=25`, `POST /api/m
 - Rejeu : le serveur n'accepte que des numéros (compteur de démarrages, séquence) plus récents.
 - Les rapports ne contiennent **pas** la position. Elle n'existe que côté serveur, en accès administrateur.
 - Le contenu d'un rapport (batterie, compteurs) n'est pas chiffré : il n'a rien de confidentiel.
+- Commandes : authentifiées par le même HMAC que les ACK qui les portent, exécutées une fois (numéro croissant
+  gardé en mémoire flash). La clé de rapport n'est jamais envoyée à distance.
+- Mises à jour : offre signée Ed25519 par la clé de publication (hors du dépôt et du serveur), table des morceaux
+  et image vérifiées par SHA-256, produit et version de départ contrôlés, pas de retour à une version plus
+  ancienne sauf si l'offre signée l'autorise ; image vérifiée par le chargeur de l'ESP32 et retour arrière
+  automatique.
 
 ## À vérifier sur le matériel
 
@@ -197,12 +267,17 @@ Passerelles (jeton observateur) : `GET /api/mesh/downlink?wait=25`, `POST /api/m
 - Mesure de tension (`adc`) sur la batterie réellement utilisée, seuil de 3,35 V.
 - Réception de l'ACK par la sentinelle via `CMD_SEND_RAW_PACKET` sur les compagnons Arborisis ; les compagnons
   qui ne le connaissent pas utilisent `CMD_SEND_RAW_DATA`, limité aux chemins de 1 octet.
+- Mise à jour sur la carte : écriture de la partition inactive, décompression par l'inflateur de la ROM, passage
+  à la nouvelle image et retour arrière (testés sur l'ordinateur avec le même code et le même inflateur ; à
+  valider une fois sur une Heltec avec `tools/ota/usb-feed.mjs`, puis par radio).
 
 ## Tests
 
 ```sh
-sh tools/sim-sentinel/build.sh            # logique (112 contrôles) + couche MeshCore simulée (18 contrôles)
-cd web && node --test tests/sentinel.test.mjs tests/sentinel-bridge.test.mjs
+sh tools/sim-sentinel/build.sh            # logique, couche MeshCore simulée, commandes et mises à jour (277 contrôles :
+                                          # vrais paquets installés au bit près, pertes, morceaux falsifiés, reprise,
+                                          # retour arrière, de voisin à voisin)
+cd web && node --test tests/sentinel.test.mjs tests/sentinel-bridge.test.mjs tests/sentinel-remote.test.mjs
 ```
 
 Démonstration locale sans matériel (12 sentinelles autour de Namur, 10 jours d'historique, rapports en direct) :
