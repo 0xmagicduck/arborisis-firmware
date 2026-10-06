@@ -1,0 +1,18 @@
+README.md
+  h_5f6fb4778954a1 14,30
+guides/sentinel.md
+  h_5f6fb4778954a1 1-211
+screens/screens.json
+  h_5f6fb4778954a1 5-7,11-13,17-19,23-25,29-31,35-37,41-43,47-49,53-55,59-61,67-69,73-75,79-81,85-87,91-93,99-101,105-107,111-113,117-157
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b2ddc1bd4baa3ff565258c8b2ee3a2309a6c27be",
+  "prompts": {},
+  "humans": {
+    "h_5f6fb4778954a1": {
+      "author": "Bastien Javaux <0xmagicduck@proton.me>"
+    }
+  }
+}
