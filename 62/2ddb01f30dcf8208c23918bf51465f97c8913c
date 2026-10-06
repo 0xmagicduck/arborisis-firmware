@@ -1,0 +1,18 @@
+README.md
+  h_5f6fb4778954a1 13-14,30-31
+guides/repeater.md
+  h_5f6fb4778954a1 231-256
+guides/sentinel.md
+  h_5f6fb4778954a1 9,12-16,156-160,165-214,238-242,253-258,270-272,277-280
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "622ddb01f30dcf8208c23918bf51465f97c8913c",
+  "prompts": {},
+  "humans": {
+    "h_5f6fb4778954a1": {
+      "author": "Bastien Javaux <0xmagicduck@proton.me>"
+    }
+  }
+}
